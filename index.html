@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todolist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="top">
+        <h3>To Do List</h3>
+    </div>
+    <div id="mid">
+        <input id="one" type="text" placeholder="Enter the tasks" name=" " required>
+        <button onclick="submit(event)">Submit</button>
+    </div>
+    <div id="textpart"> 
+        <ol id="mainlist">
+
+        </ol>
+    
+    </div>
+    <div id="window">
+        <div id="popup">
+        
+        </div>
+    </div>
+    
+
+    <script>
+        var input=document.getElementById("one");
+        var content=document.getElementById("textpart");
+        var count=1;
+        input.addEventListener("keyup",function(event)
+        {
+            if( event.keyCode===13 && input.value === '' && event.keyCode!=8)
+            {
+               alert("Enter the tasks");
+            }
+            else{
+            if(event.keyCode===13)
+            {
+                var newelement=document.createElement("li");
+                var newelement1=document.createElement("div");
+                var newelement2=document.createElement("div");
+                var mainlist=document.getElementById("mainlist");
+                newelement1.innerHTML=input.value;
+                newelement2.innerHTML=`X`;
+                newelement2.setAttribute("onclick","deleteing(event)");
+                newelement.setAttribute("onclick","showing(event)")
+                newelement2.style.cursor="pointer";
+                newelement.append(newelement1);
+                newelement.append(newelement2);
+                mainlist.append(newelement);
+                input.value="";
+              
+            }
+        }
+                 
+        });
+   function submit(event)
+   {
+    event.preventDefault();
+    if(input.value === '')
+    {
+      alert("Enter the tasks");
+      return;
+    }
+    else{
+               var newelement=document.createElement("li");
+                var newelement1=document.createElement("div");
+                var newelement2=document.createElement("div");
+                var mainlist=document.getElementById("mainlist");
+                newelement1.innerHTML=input.value;
+                newelement2.innerHTML=`X`;
+                newelement2.setAttribute("onclick","deleteing(event)");
+                newelement.setAttribute("onclick","showing(event)")
+                newelement2.style.cursor="pointer";
+                newelement.append(newelement1);
+                newelement.append(newelement2);
+                mainlist.append(newelement);
+    }
+    input.value="";
+   }
+   
+   function deleteing(event)
+   {
+       event.target.parentElement.remove();
+   }
+   var popup=document.getElementById("popup");
+   var window1=document.getElementById("window");
+  
+   function showing(event)
+   {
+      var div=document.createElement("div");
+      var button1=document.createElement("button");
+      var button2=document.createElement("button");
+      var button3=document.createElement("button");
+      var a= event.target.firstElementChild.textContent;
+     console.log(a);
+     
+      button1.innerText="Completed"
+      button2.innerText="Incomplete"
+      button3.innerText="Cancel"
+      
+      button2.setAttribute("onclick","incomplete(event)");
+      button1.style.display="flex";
+      button2.style.display="flex";
+      button1.style.backgroundColor="green";
+      button2.style.backgroundColor="red";
+      button2.style.color="white";
+      button1.style.color="white";
+      button3.addEventListener("click",function()
+      {
+        popup.style.display="none";
+        window1.style.display="none";
+      });
+      button1.addEventListener("click",function()
+      {
+        popup.style.display="none";
+        window1.style.display="none";
+         event.target.remove();
+
+      });
+      button2.addEventListener("click",function()
+      {
+        var e=event.target;
+        popup.style.display="none";
+        window1.style.display="none";
+        e.style.color="red";
+
+      });
+      div.append(button1);
+      div.append(button2);
+      div.append(button3);
+      div.style.display="flex";
+      popup.innerHTML=`<p class="close">${a}</p>`;
+      popup.append(div);
+      window1.style.display="block";
+      popup.style.display="block";
+      
+    
+}
+
+
+
+    </script>
+    
+</body>
+
+</html>
